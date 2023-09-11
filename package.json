@@ -1,9 +1,15 @@
 {
   "name": "alpine-mousedrag-plugin",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "An Alpine.js plugin for mouse drag with inertia",
-  "main": "AlpineMouseDragPlugin.ts",
-  "types": "AlpineMouseDragPlugin.ts",
+  "main": "dist/alpine-mousedrag-plugin.cjs.js",
+  "module": "dist/alpine-mousedrag-plugin.esm.js",
+  "exports": {
+    ".": {
+      "import": "dist/alpine-mousedrag-plugin.esm.js",
+      "require": "dist/alpine-mousedrag-plugin.cjs.js"
+    }
+  },
   "scripts": {
     "build": "node ./build.js"
   },
