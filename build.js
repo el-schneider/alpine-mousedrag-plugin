@@ -21,7 +21,7 @@ function build(options = {}) {
 function buildScripts() {
   // CDN
   build({
-    entryPoints: ["src/index.ts"],
+    entryPoints: ["./src/"],
     outfile: `dist/${scriptName}.js`,
     bundle: true,
     platform: "browser",
@@ -29,7 +29,7 @@ function buildScripts() {
 
   if (!watching) {
     build({
-      entryPoints: ["src/index.ts"],
+      entryPoints: ["./src/"],
       outfile: `dist/example.js`,
       bundle: true,
       platform: "browser",
@@ -38,7 +38,7 @@ function buildScripts() {
 
   // CDN — minified
   build({
-    entryPoints: ["src/index.ts"],
+    entryPoints: ["./src/"],
     outfile: `dist/${scriptName}.min.js`,
     bundle: true,
     minify: true,
@@ -47,7 +47,7 @@ function buildScripts() {
 
   // ESM
   build({
-    entryPoints: ["src/index.ts"],
+    entryPoints: ["./src/"],
     outfile: `dist/${scriptName}.esm.js`,
     bundle: true,
     platform: "neutral",
@@ -56,7 +56,7 @@ function buildScripts() {
 
   // CommonJS
   build({
-    entryPoints: ["src/index.ts"],
+    entryPoints: ["./src/"],
     outfile: `dist/${scriptName}.cjs.js`,
     bundle: true,
     target: ["node10.4"],
@@ -66,7 +66,7 @@ function buildScripts() {
 
 async function watch() {
   let ctx = await esbuild.context({
-    entryPoints: ["src/index.ts"],
+    entryPoints: ["./src/"],
     bundle: true,
     outfile: "dist/example.js",
   });
