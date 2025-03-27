@@ -22,7 +22,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "keywords": [
     "alpinejs",
