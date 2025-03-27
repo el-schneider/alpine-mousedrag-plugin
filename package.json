@@ -1,17 +1,28 @@
 {
   "name": "alpine-mousedrag-plugin",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "An Alpine.js plugin for mouse drag with inertia",
-  "main": "dist/alpine-mousedrag-plugin.cjs.js",
-  "module": "dist/alpine-mousedrag-plugin.esm.js",
+  "type": "module",
+  "main": "dist/alpine-mousedrag-plugin.cjs",
+  "module": "dist/alpine-mousedrag-plugin.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "dist/alpine-mousedrag-plugin.esm.js",
-      "require": "dist/alpine-mousedrag-plugin.cjs.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/alpine-mousedrag-plugin.js",
+      "require": "./dist/alpine-mousedrag-plugin.cjs"
     }
   },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "scripts": {
-    "build": "node ./build.js"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "alpinejs",
@@ -19,10 +30,27 @@
     "mousedrag",
     "inertia"
   ],
-  "type": "module",
   "author": "Jonas List",
   "license": "MIT",
   "dependencies": {
-    "@types/alpinejs": "^3.7.2"
+    "@types/alpinejs": "^3.13.11"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "@types/node": "^22.13.14",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "alpinejs": "^3.14.9",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0",
+    "vite": "^6.2.3",
+    "vite-plugin-dts": "^4.5.3"
+  },
+  "peerDependencies": {
+    "alpinejs": "^3.0.0"
   }
 }

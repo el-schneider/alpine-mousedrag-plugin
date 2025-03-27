@@ -1,0 +1,42 @@
+name: Build distribution assets
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+      - 'vite.config.ts'
+      - 'tsconfig.json'
+      - 'package.json'
+
+jobs:
+  build-dist:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build package
+        run: npm run build
+
+      - name: Commit distribution files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Build distribution assets
+          file_pattern: 'dist/*'
