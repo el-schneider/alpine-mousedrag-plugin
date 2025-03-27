@@ -1,6 +1,6 @@
 {
   "name": "alpine-mousedrag-plugin",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "An Alpine.js plugin for mouse drag with inertia",
   "main": "dist/alpine-mousedrag-plugin.cjs.js",
   "module": "dist/alpine-mousedrag-plugin.esm.js",

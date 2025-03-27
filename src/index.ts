@@ -16,6 +16,14 @@ const AlpineMouseDragPlugin = (Alpine: any) => {
 
       const onMouseDown = (e: MouseEvent) => {
         if (e.button !== 0) return; // Only left mouse button
+        onDragStart(e);
+      };
+
+      const onTouchStart = (e: TouchEvent) => {
+        onDragStart(e.touches[0]);
+      };
+
+      const onDragStart = (e: MouseEvent | Touch) => {
         isMouseDown = true;
         lastX = e.clientX;
         lastY = e.clientY;
@@ -26,6 +34,14 @@ const AlpineMouseDragPlugin = (Alpine: any) => {
       };
 
       const onMouseMove = (e: MouseEvent) => {
+        onDragMove(e);
+      };
+
+      const onTouchMove = (e: TouchEvent) => {
+        onDragMove(e.touches[0]);
+      };
+
+      const onDragMove = (e: MouseEvent | Touch) => {
         if (!isMouseDown) return;
         const deltaX = e.clientX - lastX;
         const deltaY = e.clientY - lastY;
@@ -41,6 +57,14 @@ const AlpineMouseDragPlugin = (Alpine: any) => {
       };
 
       const onMouseUp = (e: MouseEvent) => {
+        onDragEnd(e);
+      };
+
+      const onTouchEnd = (e: TouchEvent) => {
+        onDragEnd(e.touches[0]);
+      };
+
+      const onDragEnd = (e: MouseEvent | Touch) => {
         isMouseDown = false;
         if (friction < 1) {
           requestAnimationFrame(() => applyInertia(originalScrollSnap));
@@ -64,13 +88,19 @@ const AlpineMouseDragPlugin = (Alpine: any) => {
       };
 
       el.addEventListener("mousedown", onMouseDown);
+      el.addEventListener("touchstart", onTouchStart);
       el.addEventListener("mousemove", onMouseMove);
+      el.addEventListener("touchmove", onTouchMove);
       window.addEventListener("mouseup", onMouseUp);
+      window.addEventListener("touchend", onTouchEnd);
 
       return () => {
         el.removeEventListener("mousedown", onMouseDown);
+        el.removeEventListener("touchstart", onTouchStart);
         el.removeEventListener("mousemove", onMouseMove);
+        el.removeEventListener("touchmove", onTouchMove);
         window.removeEventListener("mouseup", onMouseUp);
+        window.removeEventListener("touchend", onTouchEnd);
       };
     }
   );

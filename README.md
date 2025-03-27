@@ -2,6 +2,8 @@
 
 An Alpine.js plugin that adds a `x-mousedrag` directive for mouse drag scrolling with inertia. The plugin allows you to easily add drag-to-scroll functionality to any scrollable element.
 
+Since version `0.2.0` the plugin also responds to touches on mobile devices. This is enabled by default, and a modifier is not necessary.
+
 ## Installation
 
 Install the package via npm:

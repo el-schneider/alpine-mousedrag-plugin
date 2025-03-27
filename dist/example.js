@@ -13,8 +13,13 @@
         const friction = modifiers.includes("disableinertia") ? 1 : 0.9;
         let originalScrollSnap;
         const onMouseDown = (e) => {
-          if (e.button !== 0)
-            return;
+          if (e.button !== 0) return;
+          onDragStart(e);
+        };
+        const onTouchStart = (e) => {
+          onDragStart(e.touches[0]);
+        };
+        const onDragStart = (e) => {
           isMouseDown = true;
           lastX = e.clientX;
           lastY = e.clientY;
@@ -22,8 +27,13 @@
           el.style.scrollSnapType = "none";
         };
         const onMouseMove = (e) => {
-          if (!isMouseDown)
-            return;
+          onDragMove(e);
+        };
+        const onTouchMove = (e) => {
+          onDragMove(e.touches[0]);
+        };
+        const onDragMove = (e) => {
+          if (!isMouseDown) return;
           const deltaX = e.clientX - lastX;
           const deltaY = e.clientY - lastY;
           lastX = e.clientX;
@@ -34,6 +44,12 @@
           el.scrollTop -= deltaY;
         };
         const onMouseUp = (e) => {
+          onDragEnd(e);
+        };
+        const onTouchEnd = (e) => {
+          onDragEnd(e.touches[0]);
+        };
+        const onDragEnd = (e) => {
           isMouseDown = false;
           if (friction < 1) {
             requestAnimationFrame(() => applyInertia(originalScrollSnap));
@@ -53,12 +69,18 @@
           }
         };
         el.addEventListener("mousedown", onMouseDown);
+        el.addEventListener("touchstart", onTouchStart);
         el.addEventListener("mousemove", onMouseMove);
+        el.addEventListener("touchmove", onTouchMove);
         window.addEventListener("mouseup", onMouseUp);
+        window.addEventListener("touchend", onTouchEnd);
         return () => {
           el.removeEventListener("mousedown", onMouseDown);
+          el.removeEventListener("touchstart", onTouchStart);
           el.removeEventListener("mousemove", onMouseMove);
+          el.removeEventListener("touchmove", onTouchMove);
           window.removeEventListener("mouseup", onMouseUp);
+          window.removeEventListener("touchend", onTouchEnd);
         };
       }
     );
